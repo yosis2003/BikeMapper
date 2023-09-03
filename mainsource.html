@@ -33,7 +33,7 @@
 
     navigator.geolocation.watchPosition(success, error);
 
-    let marker, circle;
+    let marker, circle, zoomed;
 
     function success(pos){
 
@@ -46,6 +46,15 @@
             map.removeLayer(circle);
         }
 
+        /*
+        if (!zoomed) {
+            map.fitBounds(circle.getBounds());
+        }
+        */
+        
+
+        map.setView([lat, longitude]);
+
         marker = L.marker([lat,longitude]).addTo(map);
         circle = L.circle([lat, longitude], { radius: accuracy }).addTo(map);
 
@@ -57,9 +66,11 @@
         if(err.code === 1){
             alert("Please allow location access");
         }
+        /*
         else{
             alert("Cannot get current location")
         }
+        */
     }
 </script>
 
